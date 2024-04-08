@@ -2,11 +2,36 @@
         <h3 style="color: white; margin-top: -20px;">Practica2</h3>
         <div id="lista">
             <ul class="opciones">
-                <li><a href="">COMPRA</a></li>
-                <li><a href="">CARRITO</a></li>
+                <li><a href="">ADMINISTRAR</a></li>
+                <li><a href="">HISTORIAL</a></li>
                 <li><a href="/">DESCONECTAR</a></li>
             </ul>
         </div>
     </nav>
 
     <center><H1>Bienvenido de vuelta ADMIN</H1></center>
+
+    <center><TABLE class="table_admin"  style=" width:75%" border="5">
+        <THEAD>
+            <tr style="font-size: 50px;">
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</th>
+                <th>PRECIO</th>
+                <th>ACCION</th>
+            </tr>
+        </THEAD>
+        <TBOdy>
+            {{#each products}}
+            <tr>
+                <td scope="col">{{this.producto}}</td>
+                <td scope="col">{{this.cantidad}}</td>
+                <td scope="col">{{this.precio}}</td>
+                <td scope="col">
+                    <button>INSERTAR</button><br>
+                    <button>ACTUALIZAR</button><br>
+                    <button>BORRAR</button>
+                </td>
+            </tr>
+            {{/each}}
+        </TBOdy>
+    </TABLE></center>

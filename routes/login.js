@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
 
     if (user) {
         // Autenticación exitosa, redirigir a la página principal
-        res.redirect('/gestionA');
+        res.redirect('/login/gestionA');
     } else {
         // Autenticación fallida, mostrar mensaje de error
         res.render('login', { title: 'login', error: 'Credenciales incorrectas' });

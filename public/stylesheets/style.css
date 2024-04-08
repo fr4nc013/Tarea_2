@@ -64,5 +64,14 @@ input{
   margin-top: 50px;
   border-radius: 5px;
 }
+/*
+.table_admin{
+  height: 150px;
+}
+
+.table_admin thead tr th{
+  background-color: darkgrey;
+  font-size: 15px;
+}
 
 
