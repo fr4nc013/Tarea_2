@@ -1,0 +1,35 @@
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark" id="barra_menu">
+        <h3 style="color: white; margin-top: -20px;">Practica2</h3>
+        <div id="lista">
+            <ul class="opciones">
+                <li><a href="">COMPRA</a></li>
+                <li><a href="">CARRITO</a></li>
+                <li><a href="/login">INGRESAR</a></li>
+            </ul>
+        </div>
+    </nav>
+        <center><h1 class="Header_tabla">LISTADO DE PRODUCTOS</h1></center>
+    <center>
+    <table class="table"  style=" width:75%" border="10" >
+        <thead>
+            <tr>
+                <th scope="col">PRODUCTOS</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col">CANTIDAD</th>
+                <th scope="col">ACCION</th>
+            </tr>
+        </thead>
+       <tbody>
+            <form action="/layout" id="tableForm" method="post" >
+                {{#each products}}
+                    <tr><input type="hidden" name="idFila" id="{{this.id}}">
+                        <td>{{this.producto}}</td>
+                        <td>{{this.precio}}{{this.moneda}}</td>
+                        <td><center><input type="number" placeholder="Cantidad" name="cantidadProducto"></center></td>
+                        <td><center><button type="submit" class="botontable" form="tableForm">Agregar</button></center></td>
+                    </tr>
+                {{/each}}
+            </form>
+        </tbody>
+    </table>
+    </center>

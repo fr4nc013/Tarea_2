@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  padding: 0;
+  margin:0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.Header_tabla{
+  padding: 35px 0px;
+}
+
+#barra_menu{
+  height: 60px;
+}
+#barra_menu #lista{
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+#barra_menu ul li{
+  display: inline-block;
+  padding: 7px 10px;
+}
+
+#barra_menu ul li a{
+  color: white;
+  font-size: 18px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  list-style-type: none;
+}
+
+.table{
+  height: 150px;
+}
+
+.table thead tr th{
+  background-color: darkgrey;
+  font-size: 15px;
+}
+
+input{
+  width: 80%;
+  font-size: 13px;
+}
+
+.fondo_login{
+  background-color: gray  ;
+}
+
+.div_formulario{
+  width: 50%;
+  background-color: white;
+  padding: 1%;
+  margin-top: 50px;
+  border-radius: 5px;
+}
+
+
