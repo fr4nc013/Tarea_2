@@ -9,7 +9,7 @@
         </div>
     </nav>
 
-    <center><H1>Bienvenido de vuelta ADMIN</H1></center>
+    <center><H1>Bienvenido de vuelta {{Usuario.nUsuario}}</H1></center>
 
     <center><TABLE class="table_admin"  style=" width:75%" border="5">
         <THEAD>
@@ -34,4 +34,18 @@
             </tr>
             {{/each}}
         </TBOdy>
+        <script>
+            function destroySession(req, res) {
+                req.session.destroy(function(err) {
+                    if (err) {
+                        console.error("Error al destruir la sesión:", err);
+                    } else {
+                        console.log("Sesión destruida correctamente.");
+                        
+                    };
+                });
+                res.render('/')
+            }
+
+        </script>
     </TABLE></center>

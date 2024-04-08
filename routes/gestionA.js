@@ -1,10 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var usuarios = require('../modelU/Usuario');
-var productos = require('../public/javascripts/Productos')
+var productos = require('../public/javascripts/Productos');
 
-router.get('/login/', function(req, res, next) {
-    res.render("gestionA",{title:"Padrote", products:productos});
-});
+/*function requireLogin(req, res, next) {
+    if (req.session && req.session.user) {
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}*/
+
+router.get('/', function(req, res, next) {
+    if (req.session.user){
+        res.render("gestionA",{
+            title:"padrote",
+            Usuario:req.session.user,
+            layout:"/layout",
+            products:productos
+
+        });
+    }else{
+        res.render('login')
+    }
+});    
+ //   "gestionA", { title: "Padrote", products: productos });
+
 
 module.exports = router;
