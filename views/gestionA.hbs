@@ -34,18 +34,4 @@
             </tr>
             {{/each}}
         </TBOdy>
-        <script>
-            function destroySession(req, res) {
-                req.session.destroy(function(err) {
-                    if (err) {
-                        console.error("Error al destruir la sesión:", err);
-                    } else {
-                        console.log("Sesión destruida correctamente.");
-                        
-                    };
-                });
-                res.render('/')
-            }
-
-        </script>
     </TABLE></center>
