@@ -1,35 +1,60 @@
-    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark" id="barra_menu">
-        <h3 style="color: white; margin-top: -20px;">Practica2</h3>
-        <div id="lista">
-            <ul class="opciones">
-                <li><a href="">COMPRA</a></li>
-                <li><a href="">CARRITO</a></li>
-                <li><a href="/login">INGRESAR</a></li>
-            </ul>
-        </div>
-    </nav>
-        <center><h1 class="Header_tabla">LISTADO DE PRODUCTOS</h1></center>
-    <center>
-    <table class="table"  style=" width:75%" border="10" >
-        <thead>
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark" id="barra_menu">
+    <h3 style="color: white;">Practica2</h3>
+    <div id="lista">
+        <ul class="opciones">
+            <li><a href="/carrito">CARRITO</a></li>
+            <li><a href="/">HISTORIAL</a></li>
+            <li><a href="/login">INGRESAR</a></li>
+        </ul>
+    </div>
+</nav>
+    <center><h1 class="Header_tabla">LISTADO DE PRODUCTOS</h1></center>
+<center>
+<table class="table table-dark table-hover" border="10"  style=" width:75%">
+    <thead>
+        <tr>
+            <th scope="col">PRODUCTOS</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">DISPONIBLE</th>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col">ACCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
             <tr>
-                <th scope="col">PRODUCTOS</th>
-                <th scope="col">PRECIO</th>
-                <th scope="col">CANTIDAD</th>
-                <th scope="col">ACCION</th>
+                <form action='/' id="{{this.id}}" method="post" >   
+                    <td>{{this.producto}}</td>
+                    <td>{{this.precio}}{{this.moneda}}</td>
+                    <td>{{this.cantidad}}</td>
+                    <td><center>
+                        <input type="number" 
+                               placeholder="Cantidad" 
+                               name="cantidadProducto" 
+                               min="1" 
+                               max="{{this.cantidad}}" 
+                               value="{{this}}" required>
+
+                        <input type="hidden" 
+                               name="productoId" 
+                               value="{{this.id}}">
+                    </td></center>
+                    <td><center>
+                        <button type="submit" 
+                                form="{{this.id}}"  
+                                class="botontable"
+                                style="background-color: chocolate; 
+                                       color:white;
+                                       padding:0px 5px;
+                                       width:100px;
+                                       border-radius: 8px;">
+                            Agregar
+                        </button>                            
+                    </td></center>
+                </form>
             </tr>
-        </thead>
-       <tbody>
-            <form action="/layout" id="tableForm" method="post" >
-                {{#each products}}
-                    <tr><input type="hidden" name="idFila" id="{{this.id}}">
-                        <td>{{this.producto}}</td>
-                        <td>{{this.precio}}{{this.moneda}}</td>
-                        <td><center><input type="number" placeholder="Cantidad" name="cantidadProducto"></center></td>
-                        <td><center><button type="submit" class="botontable" form="tableForm">Agregar</button></center></td>
-                    </tr>
-                {{/each}}
-            </form>
-        </tbody>
-    </table>
-    </center>
+            
+        {{/each}}
+    </tbody>
+</table>
+</center>

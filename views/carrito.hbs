@@ -1,0 +1,71 @@
+<nav id="barra_menu">
+    <a href="/" style="color: white; font-size: 30px;">Practica2</a>
+    <div id="lista">
+        <ul class="opciones">
+            <li><a id="carrito" href="/carrito">CARRITO</a></li>
+            <li><a href="/">HISTORIAL</a></li>
+            <li><a href="/login">INGRESAR</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<table class="table table-dark table-hover" border="10" style="width: 75%; margin: 100px;">
+    <thead >
+        <tr> 
+            <th style="background-color: rgb(90, 90, 90);">PRODUCTO</th>
+            <th style="background-color: rgb(90, 90, 90);">PRECIO UNIDAD</th>
+            <th style="background-color: rgb(90, 90, 90);">CANTIDAD</th>
+            <th style="background-color: rgb(90, 90, 90);">TOTAL</th>
+            <th style="background-color: rgb(90, 90, 90);">ACCION</th>
+        </tr>
+    </thead>
+
+    {{#each carritoCompra}}
+        <form action="/historial">
+            <tr>
+                <td>{{this.producto}}</td>
+                <td>{{this.precio}} {{this.moneda}}</td>
+                <td>{{this.cantidad}}</td>
+                <td>{{this.subtotalCantidad}} {{this.moneda}}</td>
+                <td><center>
+                    <button type="submit" 
+                            form=""  
+                            class="botonCarrito" 
+                            style="background-color: red; 
+                                color:white;
+                                padding:0px 5px;
+                                width:100px;
+                                border-radius: 8px;">
+                        Eliminar
+                    </button>                            
+                            
+                </center></td>
+            </tr>
+        </form>
+    {{/each}}
+    <tr>
+        <td rowspan="3" colspan="2"></td>
+        <td>SUBTOTAL</td>
+        <td>{{subtotalCompra}} RD$</td>
+        <td rowspan="3">
+            <br><center><button style="background-color: green; 
+                            color:white;
+                            padding:0px 5px;
+                            width:100px;
+                            height:50px;
+                            border-radius: 8px;">
+                Comprar
+            </button></center>
+        </td>
+    </tr>
+    <tr>
+        <td>ITBIS</td>
+        <td>{{ItbisCompra}} RD$</td>
+    </tr>
+    <tr>
+        <td>TOTAL</td>
+        <td>{{totalCompra}}RD$</td>
+    </tr>
+</table>
+</center>

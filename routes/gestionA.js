@@ -11,6 +11,7 @@ var productos = require('../public/javascripts/Productos');
 }*/
 
 router.get('/', function(req, res, next) {
+    console.log(req.session)
     if (req.session.user){
         res.render("gestionA",{
             title:"padrote",

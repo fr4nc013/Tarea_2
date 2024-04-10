@@ -1,6 +1,7 @@
     var express = require('express');
     var router = express.Router();
     var usuarios = require('../modelU/Usuario');
+    
 
 
     router.get('/', function(req, res, next) {
@@ -19,7 +20,7 @@
             req.session.user = user;
             return res.redirect('/gestionA');
         } else {
-            // Autenticación fallida, mostrar mensaje de error
+
             return res.render('login', { title: 'login', error: 'Credenciales incorrectas' });
         }
     });
