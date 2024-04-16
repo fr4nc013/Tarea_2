@@ -1,30 +1,92 @@
 var express = require('express');
 var router = express.Router();
 var productos = require('../public/javascripts/Productos');
+const Producto = require('../models/Producto');
 
-/*function requireLogin(req, res, next) {
-    if (req.session && req.session.user) {
-        return next();
+
+router.get('/', async (req, res) => {
+    console.log(req.session);
+    // Verificar si hay una sesión activa y si el usuario tiene el rol de administrador
+    if (req.session.user && req.session.user.rol === 'admin') {
+        try {
+            // Obtener los productos de la base de datos
+            const productos = await Producto.find();
+            // Renderizar la página de gestión de productos con los productos obtenidos y el usuario actual
+            res.render('gestionA', { title: 'padrote', Usuario: req.session.Usuario, layout: '/layout', products: productos });
+        } catch (error) {
+            console.error('Error al obtener productos:', error);
+            res.status(500).send('Error interno del servidor');
+        }
     } else {
+        // Si el usuario no está autenticado como administrador, redirigir al login
         res.redirect('/login');
     }
-}*/
+});
 
-router.get('/', function(req, res, next) {
-    console.log(req.session)
-    if (req.session.user){
-        res.render("gestionA",{
-            title:"padrote",
-            Usuario:req.session.user,
-            layout:"/layout",
-            products:productos
-
-        });
-    }else{
-        res.render('login')
+// Ruta para mostrar el formulario de edición de un producto
+router.get('/editar-producto/:id', async (req, res) => {
+    try {
+        const producto = await Producto.findById(req.params.id);
+        res.render('editarProducto', { producto });
+    } catch (error) {
+        console.error('Error al cargar el formulario de edición:', error);
+        res.status(500).send('Error interno del servidor');
     }
-});    
- //   "gestionA", { title: "Padrote", products: productos });
+});
+
+// Ruta para procesar la actualización de un producto
+router.post('/editar-producto/:id', async (req, res) => {
+    try {
+
+        const { nombre, cantidad, precio } = req.body;
+        await Producto.findByIdAndUpdate(req.params.id, { nombre, cantidad, precio });
+
+        res.redirect('/gestionA');
+    } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
+    
+
+
+router.post('/insertar-producto', function(req, res, next) {
+
+    const { nombre, cantidad, precio } = req.body;
+    const nuevoProducto = new Producto({
+        producto: nombre,
+        cantidad: cantidad,
+        precio: precio
+    });
+
+    nuevoProducto.save()
+        .then(producto => {
+            res.redirect('/gestionA');
+        })
+        .catch(error => {
+            console.error('Error al insertar el producto:', error);
+
+            res.status(500).send('Error al insertar el producto');
+        });
+});
+
+// Ruta para manejar la actualización de productos
+router.post('/actualizar-producto', function(req, res, next) {
+});
+
+// Ruta para manejar la eliminación de productos
+router.post('/borrar-producto', async function(req, res, next) {
+    const idProducto = req.body.id;
+
+    try {
+        await Producto.findByIdAndDelete(idProducto);
+        res.redirect('/gestionA');
+    } catch (error) {
+        console.error('Error al borrar el producto:', error);
+        res.status(500).send('Error al borrar el producto');
+    }
+});
 
 
 module.exports = router;

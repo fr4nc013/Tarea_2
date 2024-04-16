@@ -9,9 +9,8 @@
     </div>
 </nav>
 
-
 <table class="table table-dark table-hover" border="10" style="width: 75%; margin: 100px;">
-    <thead >
+    <thead>
         <tr> 
             <th style="background-color: rgb(90, 90, 90);">PRODUCTO</th>
             <th style="background-color: rgb(90, 90, 90);">PRECIO UNIDAD</th>
@@ -20,52 +19,71 @@
             <th style="background-color: rgb(90, 90, 90);">ACCION</th>
         </tr>
     </thead>
-
-    {{#each carritoCompra}}
-        <form action="/historial">
+    <tbody>
+        {{#each carritoCompra}}
             <tr>
                 <td>{{this.producto}}</td>
                 <td>{{this.precio}} {{this.moneda}}</td>
                 <td>{{this.cantidad}}</td>
                 <td>{{this.subtotalCantidad}} {{this.moneda}}</td>
-                <td><center>
-                    <button type="submit" 
-                            form=""  
-                            class="botonCarrito" 
+                <td>
+                    <center>
+                        <button 
+                            class="botonEliminar" 
                             style="background-color: red; 
                                 color:white;
                                 padding:0px 5px;
                                 width:100px;
-                                border-radius: 8px;">
-                        Eliminar
-                    </button>                            
-                            
-                </center></td>
+                                border-radius: 8px;"
+                            data-producto-id="{{this.UID}}">
+                            Eliminar
+                        </button>
+                    </center>
+                </td>
             </tr>
-        </form>
-    {{/each}}
-    <tr>
-        <td rowspan="3" colspan="2"></td>
-        <td>SUBTOTAL</td>
-        <td>{{subtotalCompra}} RD$</td>
-        <td rowspan="3">
-            <br><center><button style="background-color: green; 
-                            color:white;
-                            padding:0px 5px;
-                            width:100px;
-                            height:50px;
-                            border-radius: 8px;">
-                Comprar
-            </button></center>
-        </td>
-    </tr>
-    <tr>
-        <td>ITBIS</td>
-        <td>{{ItbisCompra}} RD$</td>
-    </tr>
-    <tr>
-        <td>TOTAL</td>
-        <td>{{totalCompra}}RD$</td>
-    </tr>
+        {{/each}}
+        <tr>
+            <td rowspan="3" colspan="2"></td>
+            <td>SUBTOTAL</td>
+            <td>{{subtotalCompra}} RD$</td>
+            <td rowspan="3">
+                <br><center><button form="{{UIDCarrito}}"
+                                type="submit" 
+                                style="background-color: green; 
+                                color:white;
+                                padding:0px 5px;
+                                width:100px;
+                                height:50px;
+                                border-radius: 8px;">
+                    Comprar
+                </button></center>
+            </td>
+        </tr>
+        <tr>
+            <td>ITBIS</td>
+            <td>{{ItbisCompra}} RD$</td>
+        </tr>
+        <tr>
+            <td>TOTAL</td>
+            <td>{{totalCompra}}RD$</td>
+        </tr>
+    </tbody>
 </table>
-</center>
+
+<form id="formEliminarProducto" action="/carrito" method="post">
+    <input type="hidden" id="productoIdU" name="productoIdU">
+</form>
+
+<script>
+    // Agrega un evento click a los botones de eliminar
+    document.querySelectorAll('.botonEliminar').forEach(button => {
+        button.addEventListener('click', function() {
+            // Obtén el ID del producto del atributo data-producto-id
+            const productoId = this.getAttribute('data-producto-id');
+            // Asigna el ID del producto al campo oculto del formulario
+            document.getElementById('productoIdU').value = productoId;
+            // Envía el formulario
+            document.getElementById('formEliminarProducto').submit();
+        });
+    });
+</script>

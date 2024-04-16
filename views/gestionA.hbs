@@ -9,9 +9,25 @@
         </div>
     </nav>
 
-    <center><H1>Bienvenido de vuelta {{Usuario.nUsuario}}</H1></center>
+    <center><H1>Bienvenido de vuelta {{Usuario.nUsuario}}</H1></center><br><br>
+<center>
+    <h3>Puede insertar un producto a su gusto {{Usuario.nUsuario}}</h3>
+    <form action="/gestionA/insertar-producto" method="post">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" required><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required><br>
+
+        <button type="submit">Insertar Producto</button><br><br><br>
+    </form>
+    </center>
 
     <center><TABLE class="table"  style=" width:75%" border="5">
+        <h2>Tabla de productos</h2>
         <THEAD>
             <tr style="font-size: 50px;">
                 <th scope="col">PRODUCTO</th>
@@ -22,16 +38,28 @@
         </THEAD>
         <TBOdy>
             {{#each products}}
-            <tr>
-                <td>{{this.producto}}</td>
-                <td>{{this.cantidad}}</td>
-                <td>{{this.precio}}</td>
-                <td>
-                    <button>Insertar</button><br>
-                    <button>Actualizar</button><br style="padding-top: 2px;">
-                    <button>Borrar</button>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{this.producto}}</td>
+                    <td>{{this.cantidad}}</td>
+                    <td>{{this.precio}}</td>
+                    <td>
+                        <form action="/gestionA/borrar-producto" method="post">
+                            <input type="hidden" name="id" value="{{this._id}}">
+                            <button type="submit">Borrar</button>
+                        </form>
+                        <button onclick="editarProducto('{{this._id}}')">Editar</button>
+                    </td>
+
+
+                </tr>
             {{/each}}
+
         </TBOdy>
     </TABLE></center>
+
+    <script>
+    function editarProducto(id) {
+        // Redirigir a la página de edición del producto con el ID proporcionado
+        window.location.href = '/gestionA/editar-producto/' + id;
+    }
+    </script>

@@ -4,13 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-
+const mongoose = require('mongoose');
+const db = require('./config/db')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var gestionARouter = require('./routes/gestionA');
 var carritoRouter = require('./routes/carrito')
+var editarProductoRouter = require('./routes/editarProducto')
+
 const { SessionI } = require('inspector');
 
 var app = express();
