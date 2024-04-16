@@ -1,12 +1,23 @@
-<form action="/gestionA/editar-producto/{{producto._id}}" method="post">
-    <label for="nombre">Nombre del Producto:</label>
-    <input type="text" id="nombre" name="nombre" value="{{producto.producto}}" required><br>
 
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" name="cantidad" value="{{producto.cantidad}}" required><br>
+<div style="width: 50%; margin: 50px 25%; padding:20px 10px ; background-color: rgb(199, 199, 199); border-radius: 10px;">
+    <h3 style="text-align: center;">Edicion del producto</h3><br>
+    <form action="/gestionA/editar-producto/{{producto._id}}" method="post">
+        <label for="nombre" style="text-align: right;"><h5>Nombre del Producto:</h5></label><br>
+        <input type="text" id="nombre" name="nombre" value="{{producto.producto}}" style="margin-left: 50px;" required><br><br>
 
-    <label for="precio">Precio:</label>
-    <input type="number" id="precio" name="precio" value="{{producto.precio}}" required><br>
 
-    <button type="submit">Guardar Cambios</button>
-</form>
+        <label for="cantidad" style="text-align: left;"><h5>Cantidad:</h5></label><br>
+        <input type="number" id="cantidad" name="cantidad" value="{{producto.cantidad}}" style="margin-left: 50px;" required><br><br>
+
+        <label for="precio" style="text-align: left;"><h5>Precio:</h5></label><br>
+        <input type="number" id="precio" name="precio" value="{{producto.precio}}" style="margin-left: 50px;"required><br><br>
+
+        <center><button type="submit" style="background-color: rgb(51, 51, 51); 
+                                color:white;
+                                padding:0px 5px;
+                                width:100px;
+                                height:50px;
+                                border-radius: 8px;">Guardar Cambios
+        </button></center>
+    </form>
+</div></center>

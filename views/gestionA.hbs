@@ -2,7 +2,7 @@
         <h3 style="color: white; margin-top: -20px;">Practica2</h3>
         <div id="lista">
             <ul class="opciones">
-                <li><a>ADMINISTRAR</a></li>
+                <li><a id="carrito">ADMINISTRAR</a></li>
                 <li><a href="">HISTORIAL</a></li>
                 <li><a href="/">DESCONECTAR</a></li>
             </ul>
@@ -11,22 +11,30 @@
 
     <center><H1>Bienvenido de vuelta {{Usuario.nUsuario}}</H1></center><br><br>
 <center>
+    <div style="width: 50%; padding:20px 10px 0px 10px; background-color: rgb(124, 124, 124); border-radius: 10px;">
     <h3>Puede insertar un producto a su gusto {{Usuario.nUsuario}}</h3>
     <form action="/gestionA/insertar-producto" method="post">
-        <label for="nombre">Nombre del Producto:</label>
+        <label for="nombre">Nombre del Producto:</label><br>
         <input type="text" id="nombre" name="nombre" required><br>
 
-        <label for="cantidad">Cantidad:</label>
+        <label for="cantidad">Cantidad:</label><br>
         <input type="number" id="cantidad" name="cantidad" required><br>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" required><br>
+        <label for="precio">Precio:</label><br>
+        <input type="number" id="precio" name="precio" required><br><br>
 
-        <button type="submit">Insertar Producto</button><br><br><br>
+        <button type="submit" style="background-color: rgb(97, 161, 81); 
+                                color:white;
+                                padding:0px 0px;
+                                width:100px;
+                                height:50px;
+                                border-radius: 8px;">Insertar</button><br><br>
     </form>
     </center>
+    </div>
+    <br>
 
-    <center><TABLE class="table"  style=" width:75%" border="5">
+    <center><TABLE class="table table-dark table-hover" border="10"  style=" width:75%">
         <h2>Tabla de productos</h2>
         <THEAD>
             <tr style="font-size: 50px;">
@@ -45,9 +53,21 @@
                     <td>
                         <form action="/gestionA/borrar-producto" method="post">
                             <input type="hidden" name="id" value="{{this._id}}">
-                            <button type="submit">Borrar</button>
+                            <button type="submit" 
+                                    style="background-color: rgb(243, 17, 17); 
+                                    color:white;
+                                    padding:0px 5px;
+                                    width:60px;
+                                    height:30px;
+                                    border-radius: 8px;">Borrar</button>
                         </form>
-                        <button onclick="editarProducto('{{this._id}}')">Editar</button>
+                        <button onclick="editarProducto('{{this._id}}')" 
+                                style="background-color: rgb(155, 155, 155); 
+                                    color:white;
+                                    padding:0px 5px;
+                                    width:60px;
+                                    height:30px;
+                                    border-radius: 8px;">Editar</button>
                     </td>
 
 

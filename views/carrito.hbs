@@ -9,7 +9,8 @@
     </div>
 </nav>
 
-<table class="table table-dark table-hover" border="10" style="width: 75%; margin: 100px;">
+
+<table id="tablaCarrito" class="table table-dark table-hover" border="10" style="width: 75%; margin-top: 100px; margin-left: 100px;">
     <thead>
         <tr> 
             <th style="background-color: rgb(90, 90, 90);">PRODUCTO</th>
@@ -47,16 +48,7 @@
             <td>SUBTOTAL</td>
             <td>{{subtotalCompra}} RD$</td>
             <td rowspan="3">
-                <br><center><button form="{{UIDCarrito}}"
-                                type="submit" 
-                                style="background-color: green; 
-                                color:white;
-                                padding:0px 5px;
-                                width:100px;
-                                height:50px;
-                                border-radius: 8px;">
-                    Comprar
-                </button></center>
+                
             </td>
         </tr>
         <tr>
@@ -69,20 +61,31 @@
         </tr>
     </tbody>
 </table>
+<div style="background-color: rgb(90, 90, 90); width: 50%; padding:15px 5px;margin-left:200px; border-radius:10px;">
+<form id="formCompra" action="/" method="post">
+    <label for="nombre" style="color:aliceblue; border-radius:10px;">Ingrese su nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <button type="submit" style="background-color: rgb(96, 175, 49); 
+                                color:white;
+                                padding:0px 5px;
+                                width:100px;
+                                border-radius: 8px;">Comprar</button>
+</form>
+</div>
 
 <form id="formEliminarProducto" action="/carrito" method="post">
     <input type="hidden" id="productoIdU" name="productoIdU">
 </form>
 
 <script>
-    // Agrega un evento click a los botones de eliminar
+
     document.querySelectorAll('.botonEliminar').forEach(button => {
         button.addEventListener('click', function() {
-            // Obtén el ID del producto del atributo data-producto-id
+ 
             const productoId = this.getAttribute('data-producto-id');
-            // Asigna el ID del producto al campo oculto del formulario
+
             document.getElementById('productoIdU').value = productoId;
-            // Envía el formulario
+
             document.getElementById('formEliminarProducto').submit();
         });
     });

@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const Producto = require('../models/Producto');
 
@@ -17,4 +17,4 @@ router.post('/gestionA/editar-producto/:id', async (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
-module.exports = router;
+module.exports = router;*/

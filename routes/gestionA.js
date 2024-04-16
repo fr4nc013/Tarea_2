@@ -5,8 +5,7 @@ const Producto = require('../models/Producto');
 
 
 router.get('/', async (req, res) => {
-    console.log(req.session);
-    // Verificar si hay una sesión activa y si el usuario tiene el rol de administrador
+
     if (req.session.user && req.session.user.rol === 'admin') {
         try {
             // Obtener los productos de la base de datos
@@ -24,22 +23,29 @@ router.get('/', async (req, res) => {
 });
 
 // Ruta para mostrar el formulario de edición de un producto
-router.get('/editar-producto/:id', async (req, res) => {
-    try {
-        const producto = await Producto.findById(req.params.id);
-        res.render('editarProducto', { producto });
-    } catch (error) {
-        console.error('Error al cargar el formulario de edición:', error);
-        res.status(500).send('Error interno del servidor');
-    }
-});
 
-// Ruta para procesar la actualización de un producto
+    router.get('/editar-producto/:id', async (req, res) => {
+        try {
+            const producto = await Producto.findById(req.params.id);
+            res.render('editarProducto', { producto });
+        } catch (error) {
+            console.error('Error al cargar el formulario de edición:', error);
+            res.status(500).send('Error interno del servidor');
+        }
+    });
+
+
+    
+
 router.post('/editar-producto/:id', async (req, res) => {
     try {
-
+        console.log('Datos del formulario:', req.body);
         const { nombre, cantidad, precio } = req.body;
-        await Producto.findByIdAndUpdate(req.params.id, { nombre, cantidad, precio });
+        console.log(req.body)
+        console.log('ID del producto a actualizar:', req.params.id);
+
+        await Producto.findByIdAndUpdate(req.params.id, { producto:nombre, cantidad, precio });
+
 
         res.redirect('/gestionA');
     } catch (error) {
@@ -48,7 +54,7 @@ router.post('/editar-producto/:id', async (req, res) => {
     }
 });
 
-    
+
 
 
 router.post('/insertar-producto', function(req, res, next) {
@@ -69,10 +75,6 @@ router.post('/insertar-producto', function(req, res, next) {
 
             res.status(500).send('Error al insertar el producto');
         });
-});
-
-// Ruta para manejar la actualización de productos
-router.post('/actualizar-producto', function(req, res, next) {
 });
 
 // Ruta para manejar la eliminación de productos
